@@ -10,7 +10,7 @@ The program is represented by the module ```format_price.py```. Module ```format
 
 The program uses these libs from Python standart library:
 
-- ```locale```
+- ```decimal```
 - ```argparse```
 
 The program is covered by tests with ```unittest```- module. You can check it in module ```tests.py```

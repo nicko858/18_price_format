@@ -1,5 +1,6 @@
-import locale
 import argparse
+from decimal import Decimal
+from decimal import InvalidOperation
 
 
 def get_args():
@@ -18,10 +19,11 @@ def get_args():
 
 
 def format_price(price):
-    locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
     try:
-        return locale.format('%d', float(price), grouping=True)
-    except (ValueError, TypeError):
+        return '{:,}'.format(
+            Decimal(str(price)).normalize()
+        ).replace(',', ' ')
+    except (ValueError, TypeError, InvalidOperation):
         return None
 
 

@@ -1,27 +1,36 @@
 import unittest
-import locale
 from format_price import format_price
 
 
 class FormatPriceTestCase(unittest.TestCase):
-    def test_return_str(self):
+    def test_price_is_int(self):
         price = format_price(4356987)
-        self.assertIsInstance(price, str)
+        self.assertEqual(price, "4 356 987")
 
-    def test_return_none_if_letters(self):
-        price = format_price('hahaha')
+    def test_price_is_letters(self):
+        price = format_price("hahaha")
         self.assertIsNone(price)
 
-    def test_return_none_if_none(self):
+    def test_price_is_none(self):
         price = format_price(None)
         self.assertIsNone(price)
 
-    def test_return_price_in_locale_format(self):
-        test_price = 4356987
-        price = format_price(test_price)
-        locale_price = locale.format('%d', test_price, grouping=True)
-        self.assertIn(price, locale_price)
+    def test_price_is_float(self):
+        price = format_price(4356987.65700)
+        self.assertEqual(price, "4 356 987.657")
+
+    def test_price_is_tupple(self):
+        price = format_price((1, 2, 3, 4, 5, 6))
+        self.assertIsNone(price)
+
+    def test_price_is_list(self):
+        price = format_price([1, 2, 3, 4, 5, 6])
+        self.assertIsNone(price)
+
+    def test_price_is_dict(self):
+        price = format_price({})
+        self.assertIsNone(price)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
