@@ -25,10 +25,12 @@ def format_price(price):
             return "{:,}".format(
                 Decimal(str(price)).normalize()).replace(",", " ")
         else:
-            return "{:,}".format(
-                Decimal(str(price)).quantize(
-                    Decimal("1.00"), ROUND_05UP)
-            ).replace(",", " ")
+            rounded_price = Decimal(str(price)).quantize(
+                Decimal("1.00"),
+                ROUND_05UP
+            )
+            formated_price = "{:,}".format(rounded_price)
+            return formated_price.replace(",", " ")
     except (ValueError, TypeError, InvalidOperation):
         return None
 
