@@ -17,7 +17,7 @@ class FormatPriceTestCase(unittest.TestCase):
 
     def test_price_is_float(self):
         price = format_price(4356987.65700)
-        self.assertEqual(price, "4 356 987.657")
+        self.assertEqual(price, "4 356 987.66")
 
     def test_price_is_tupple(self):
         price = format_price((1, 2, 3, 4, 5, 6))

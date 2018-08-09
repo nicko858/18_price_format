@@ -1,7 +1,4 @@
 import argparse
-from decimal import Decimal
-from decimal import InvalidOperation
-from decimal import ROUND_05UP
 
 
 def get_args():
@@ -21,17 +18,9 @@ def get_args():
 
 def format_price(price):
     try:
-        if float.is_integer(float(price)):
-            return "{:,}".format(
-                Decimal(str(price)).normalize()).replace(",", " ")
-        else:
-            rounded_price = Decimal(str(price)).quantize(
-                Decimal("1.00"),
-                ROUND_05UP
-            )
-            formated_price = "{:,}".format(rounded_price)
-            return formated_price.replace(",", " ")
-    except (ValueError, TypeError, InvalidOperation):
+        return '{:,.2f}'.format(
+            float(price)).replace(',', ' ').replace('.00', '')
+    except (ValueError, TypeError):
         return None
 
 
