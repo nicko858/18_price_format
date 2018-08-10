@@ -18,6 +18,8 @@ def get_args():
 
 def format_price(price):
     try:
+        if isinstance(price, bool):
+            raise TypeError
         return '{:,.2f}'.format(
             float(price)).replace(',', ' ').replace('.00', '')
     except (ValueError, TypeError):
@@ -27,4 +29,4 @@ def format_price(price):
 if __name__ == "__main__":
     args = get_args()
     price = args.price
-    print(format_price(price))
+    print(format_price(True))
